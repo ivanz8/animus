@@ -112,28 +112,69 @@
             background-color: #fff;
             margin: 5% auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
             border-radius: 10px;
+            width: 80%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            position: relative;
         }
 
         .close-btn {
             color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close-btn:hover, .close-btn:focus {
-            color: #000;
-            text-decoration: none;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
             cursor: pointer;
         }
 
-        /* Error message style */
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .modal-content form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .modal-content form label {
+            font-weight: bold;
+        }
+
+        .modal-content form input,
+        .modal-content form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .modal-content form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .modal-content form button:hover {
+            opacity: 0.8;
+        }
+
         .error-message {
             color: red;
+            margin-top: 10px;
         }
+
         .logout-btn {
             background-color: #dc3545;
             color: #fff;
@@ -147,7 +188,6 @@
         .logout-btn:hover {
             opacity: 0.8;
         }
-        
     </style>
 </head>
 <body>
