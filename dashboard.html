@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Home Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">HOME</a></li>
+                <li><a href="appointment.html">MY APPOINTMENTS</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Available Doctors</h1>
+        <div class="doctor-list">
+            <div class="card">
+                <img src="doctor1.jpg" alt="Doctor 1">
+                <h2>Dr. John Doe</h2>
+                <p>Specialist in Cardiology</p>
+                <button class="schedule-btn" onclick="openModal('Dr. John Doe')">Schedule</button>
+            </div>
+            <div class="card">
+                <img src="doctor2.jpg" alt="Doctor 2">
+                <h2>Dr. Jane Smith</h2>
+                <p>Specialist in Neurology</p>
+                <button class="schedule-btn" onclick="openModal('Dr. Jane Smith')">Schedule</button>
+            </div>
+            <div class="card">
+                <img src="doctor3.jpg" alt="Doctor 3">
+                <h2>Dr. Emily Johnson</h2>
+                <p>Specialist in Pediatrics</p>
+                <button class="schedule-btn" onclick="openModal('Dr. Emily Johnson')">Schedule</button>
+            </div>
+            <!-- Add more doctor cards as needed -->
+        </div>
+    </main>
+
+    <!-- Modal for appointment form -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Schedule an Appointment</h2>
+            <form id="appointmentForm">
+                <label for="doctorName">Doctor Name</label>
+                <input type="text" id="doctorName" name="doctorName" readonly>
+
+                <label for="ownerName">Owner Name</label>
+                <input type="text" id="ownerName" name="ownerName" required>
+
+                <label for="petName">Pet Name</label>
+                <input type="text" id="petName" name="petName" required>
+
+                <label for="appointmentDate">Date</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+                <label for="appointmentTime">Time</label>
+                <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+                <label for="symptoms">Symptoms</label>
+                <textarea id="symptoms" name="symptoms" required></textarea>
+
+                <button type="submit">Submit</button>
+                <p class="error-message" id="appointmentError"></p>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { app } from "/public/firebase/firebase-config.js"; // Adjust the path as needed
+
+        // Get the Firebase Auth and Database instances
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Check if user is authenticated
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Open modal
+        window.openModal = function(doctorName) {
+            document.getElementById('doctorName').value = doctorName;
+            document.getElementById('appointmentModal').style.display = 'block';
+        };
+
+        // Close modal
+        window.closeModal = function() {
+            document.getElementById('appointmentModal').style.display = 'none';
+        };
+
+        // Handle form submission
+        const appointmentForm = document.getElementById('appointmentForm');
+        appointmentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const doctorName = document.getElementById('doctorName').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const petName = document.getElementById('petName').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            const symptoms = document.getElementById('symptoms').value;
+            
+            try {
+                const user = auth.currentUser;
+                const date = new Date(appointmentDate);
+                const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+                const time = new Date(`1970-01-01T${appointmentTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const appointmentData = {
+                    doctorName,
+                    ownerName,
+                    petName,
+                    date: formattedDate,
+                    time,
+                    symptoms,
+                    userId: user.uid
+                };
+                const userAppointmentsRef = ref(database, 'user_appointments/' + user.uid);
+                const newAppointmentRef = push(userAppointmentsRef);
+                await set(newAppointmentRef, appointmentData);
+                closeModal();
+                alert('Appointment scheduled successfully!');
+            } catch (error) {
+                const errorMessage = error.message;
+                document.getElementById('appointmentError').textContent = errorMessage;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animus Vet Finder</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 100px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #45a049;
+}
+
+nav ul li .login-btn {
+    background-color: #fff;
+    color: #4CAF50;
+}
+
+nav ul li .signup-btn {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+nav ul li .login-btn:hover, nav ul li .signup-btn:hover {
+    opacity: 0.8;
+}
+
+main {
+    padding: 20px;
+}
+
+section#home {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+section#about {
+    padding: 50px 20px;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Animus Vet Finder Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#doctors">DOCTORS</a></li>
+                <li><a href="#about">ABOUT US</a></li>
+                <li><a href="login.html" class="login-btn">LOGIN</a></li>
+                <li><a href="signup.html" class="signup-btn">SIGN UP</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h1>Welcome to Animus Vet Finder</h1>
+            <p>Your one-stop solution for finding the best veterinary care for your pets.</p>
+        </section>
+        <section id="about">
+            <h2>About Animus Vet Finder</h2>
+            <p>At Animus Vet Finder, we are dedicated to providing the best veterinary care for your pets. Our mission is to connect pet owners with the most qualified and compassionate veterinarians in their area.</p>
+            <h3>Our Mission</h3>
+            <p>Our mission is to ensure every pet receives the best possible care. We strive to make it easy for pet owners to find and book appointments with top-rated veterinarians.</p>
+            <h3>Our Vision</h3>
+            <p>Our vision is to create a world where every pet has access to high-quality veterinary care, regardless of their location or their owner's financial situation. We believe that by making veterinary care more accessible, we can improve the lives of pets and their owners.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Animus Vet Finder. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQRZsiU5GA8RS8wVFbJZmugltN3R7p2mc",
+            authDomain: "animus-54d1e.firebaseapp.com",
+            databaseURL: "https://animus-54d1e-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "animus-54d1e",
+            storageBucket: "animus-54d1e.appspot.com",
+            messagingSenderId: "446756929721",
+            appId: "1:446756929721:web:e02562ba34e8c66a9f5b68",
+            measurementId: "G-DC0XWYPENX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+</body>
+</html>

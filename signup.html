@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase/firebase-config.js"></script>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+
+    <!-- Signup Form -->
+    <form id="signupForm">
+        <input type="email" id="signupEmail" placeholder="Email" required><br>
+        <input type="password" id="signupPassword" placeholder="Password" required><br>
+        <button type="submit">Sign Up</button>
+        <p class="error-message" id="signupError"></p>
+    </form>
+
+    <script type="module">
+        // Import Firebase modules
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { app } from "/public/firebase/firebase-config.js"; // Adjust the path as needed
+
+        // Get the Firebase Auth instance
+        const auth = getAuth(app);
+
+        // Signup form submission
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log('Signed up as:', user.email);
+                // Redirect after successful signup
+                window.location.href = 'dashboard.html'; // Replace with your dashboard page
+            } catch (error) {
+                const errorMessage = error.message;
+                document.getElementById('signupError').textContent = errorMessage;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase/firebase-config.js"></script>
+
+</head>
+<body>
+    <h1>Login</h1>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required><br>
+        <input type="password" id="loginPassword" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+        <p class="error-message" id="loginError"></p>
+    </form>
+
+    <script type="module">
+        // Import Firebase modules
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { app } from "/public/firebase/firebase-config.js"; // Adjust the path as needed
+
+        // Get the Firebase Auth instance
+        const auth = getAuth(app);
+
+        // Login form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log('Logged in as:', user.email);
+                // Redirect after successful login
+                window.location.href = 'dashboard.html'; // Replace with your dashboard page
+            } catch (error) {
+                const errorMessage = error.message;
+                document.getElementById('loginError').textContent = errorMessage;
+            }
+        });
+    </script>
+</body>
+</html>
