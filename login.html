@@ -106,6 +106,7 @@
 
     <div class="signup-link">
         <p>Don't have an account? <a href="signup.html">Signup</a></p>
+        <p><a href="#" id="forgotPassword">Forgot Password?</a></p>
     </div>
     
 
@@ -113,15 +114,14 @@
 
     <script type="module">
         // Import Firebase modules
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
-
+    
         // Get the Firebase Auth instance
         const auth = getAuth(app);
-
-        // Login form submission
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', async (e) => {
+    
+        // Function to handle login form submission
+        const handleLogin = async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
@@ -136,7 +136,31 @@
                 const errorMessage = error.message;
                 document.getElementById('loginError').textContent = errorMessage;
             }
-        });
+        };
+    
+        // Function to handle "Forgot Password" link click
+        const handleForgotPassword = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+    
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert('Password reset email sent. Check your inbox.');
+            } catch (error) {
+                const errorMessage = error.message;
+                console.error(errorMessage);
+                alert(errorMessage);
+            }
+        };
+    
+        // Login form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', handleLogin);
+    
+        // Forgot password link click event
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+        forgotPasswordLink.addEventListener('click', handleForgotPassword);
     </script>
+    
 </body>
 </html>
