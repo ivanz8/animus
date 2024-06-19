@@ -1,0 +1,784 @@
+/* Medium Layout: 992px. */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .container{
+        width: 970px;
+    }
+    
+.main_menu > .collapse.navbar-collapse > ul.nav.navbar-nav li a {
+  font-size: 14px;
+}
+.nav > li > a {
+  padding: 15px 11px;
+}    
+.message {
+  width: 60%;
+}    
+.sev_tables > ul > li {
+  width: 150px;
+}    
+.dent_tab_cont img {
+  margin-bottom: 5px;
+}    
+.dent_tab_cont p {
+  line-height: 27px;
+  margin-right: 5%;
+}    
+.dent_tab_cont ul {
+  margin: 30px 0 0;
+}    
+.dent_tab_cont ul li {
+  margin-bottom: 20px;
+  margin-right: 0;
+  padding-left: 23px;
+  width: 50%;
+}    
+.latest_news .single_news > div {
+  width: 230px;
+}    
+.latest_news .news_txt::after, .latest_news .style2 .let_news_photo::after{
+  top: 75px;
+}    
+.partner_carousel .doc_overly p {
+  line-height: 22px;
+  margin-bottom: 5px;
+}
+.parnter_area {
+  padding-bottom: 0;
+}
+.your_app_img, .booking_text_bottom, .booking_buttn_bottom{
+  height: 89px;
+}    
+.booking_text_bottom {
+  padding-left: 10px;
+}    
+.booking_buttn_bottom a {
+  margin-right: 15px;
+  width: 190px;
+}    
+.faddress h3, .emcall h3, .emailus h3{
+  margin-bottom: 30px;
+}    
+.footer_top {
+  padding-bottom: 50px;
+  padding-top: 50px;
+}    
+#nwsemail {
+  width: 200px;
+}    
+.page_banner {
+  min-height: 350px;
+}    
+.single_doc_imgt {
+  width: 295px;
+}    
+.docimg_lt {
+  width: 250px;
+}    
+.docimg_rt {
+  width: 660px;
+}    
+.single_doc_imgrt {
+  margin-bottom: 30px;
+  margin-left: 70px;
+  width: 250px;
+}    
+.sec_top_doci3 {
+  margin-left: -68px;
+}    
+.sec_top_doci3 .single_doc_imgrt:last-child{
+    display: none;
+}    
+.services2_area {
+  padding-top: 100px;
+}
+.servdetail_book a {
+  width: 200px;
+}    
+.servdetail_book {
+  margin-bottom: 30px;
+}    
+.faq_cate_list {
+  padding: 27px 0 15px 15px;
+}    
+.first3bottom .single_img:last-child, .gall_bottom_part .single_img:last-child{
+    display: none;
+}    
+.single_img {
+  margin-bottom: 30px;
+  margin-left: 25px;
+}    
+.all_gallery {
+  padding-bottom: 80px;
+}    
+.comm_txt {
+  width: 595px;
+}    
+.all_list_element ul {
+  width: 210px;
+}    
+.smk_accordion.acc_with_icon .accordion_in .acc_head, .smk_accordion.acc_with_icon .accordion_in .acc_content {
+  padding-left: 15px;
+  padding-right: 30px;
+} 
+.smk_accordion .accordion_in .acc_head {
+  font-size: 15px;
+}    
+a.big_btn {
+  font-size: 15px;
+  padding: 0 25px;
+}    
+.single_product {
+  margin-left: 65px;
+}
+.popular_pro .cart_pro {
+  display: none;
+}    
+.shop_page_area {
+  padding-bottom: 100px;
+}    
+.order_product {
+  padding: 25px 10px;
+}    
+.pro_text_details {
+  width: 280px;
+}    
+.single_addres p {
+  width: 200px;
+} 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+.container{width:750px;}
+.book_now {
+  display: none;
+}
+.cart_count {
+  float: right;
+}
+.main_menu > .collapse.navbar-collapse > ul.nav.navbar-nav li a {
+    font-size: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.search > .navbar-form.navbar-left > .form-group {
+  display: none;
+}
+.header_top {
+  text-align: center;
+}
+.header_top ul {
+  float: none;
+}
+.header_top ul li {
+  display: inline-block;
+  float: none;
+}
+.doctor_img {
+  padding-left: 0;
+}
+.doctor_img > img {
+  margin-bottom: 0;
+}
+.doctor_text {
+  margin-left: 0;
+}
+.dtefield {
+  width: 28%;
+}
+.sev_tables > ul > li {
+  width: 16.5%; padding-bottom: 1px;
+}
+.sev_tables ul li a {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 48px 0 20px 7px;
+}
+.dent_tab_cont ul li {
+  margin-right: 0;
+  width: 50%;
+}
+.dent_tab_cont ul {
+  margin: 20px 0 0;
+}
+.latest_news .single_news {
+  margin-bottom: 20px;
+} 
+.latest_news_area {
+  padding-bottom: 25px;
+}
+.hospital_room_img {
+  float: none;
+  margin: 0 auto;
+}
+.hospital_room {
+  text-align: center;
+}
+.your_app_img, .booking_text_bottom, .booking_buttn_bottom {
+  height: 89px;
+}
+.your_app_img img {
+  height: 100%;
+}
+.booking_text_bottom {
+  padding-left: 15px!important;
+}
+.booking_text_bottom h3 {
+  margin: 18px 0 5px;
+}
+.booking_buttn_bottom a {
+  margin-right: 8px;
+  width: 180px;
+}
+.display-none{display:none}
+#nwsemail {
+  width: 208px;
+}
+.medicare {
+  padding-bottom: 39px;
+  padding-top: 39px;
+}
+.footer_menu ul li {
+  margin-right: 16px;
+}
+/* gallery */
+.single_img {
+  float: left;
+  width:166px;
+}
+.gallery_img img {
+  height: auto;
+  width: 100%;
+}
+.galheilight > .gallery_img img {
+  height: auto;
+  width: 100%;
+}
+.boo_apppinment_left {
+  margin-right: 0;
+}
+.doc_ctrl ul li {
+  font-size: 14px;
+  letter-spacing: -0.3px;
+  margin: 10px 5px;
+}    
+.docimg_lt {
+  width: 200px;
+}    
+.docimg_rt {
+  margin-left: 0;
+  width: 495px;
+}    
+.single_doc_imgrt {
+  width: 145px;
+}    
+.doc_img_ttle_rt img {
+  height: auto;
+}    
+.single_doc_imgt {
+  width: 220px;
+}    
+.serv_cardiology img, .serv_dental img, .serv_eye img, .serv_neu img {
+  height: auto;
+}
+.services_details_page {
+  padding-bottom: 50px;
+}
+.single_addres p {
+  width: 200px;
+}
+.faq_ctrl div:last-child {
+  margin-right: 0;
+}
+.smk_accordion.acc_with_icon .accordion_in .acc_head, .smk_accordion.acc_with_icon .accordion_in .acc_content {
+  padding-left: 10px;
+  padding-right: 30px;
+}    
+.appointment_area {
+  padding-bottom: 100px;
+  padding-top: 100px;
+}    
+.all_list_element > ul {
+  margin-bottom: 15px;
+}    
+.author_part_detials {
+  padding: 10px;
+}    
+.author_img_details {
+  margin-right: 0;
+  width: 120px;
+}    
+.author_detail_txt {
+  width: 310px;
+}    
+.comm_img {
+  margin-right: 0;
+  width: 80px;
+}    
+.comm_txt {
+  width: 370px;
+}    
+.comm_img_rep {
+  margin-right: 15px;
+}    
+.new_content {
+  padding-bottom: 50px;
+}    
+.shop_content {
+  width: 100%;
+} 
+.single_product {
+  width: 210px;
+}    
+.prod_img, .prod_img a img {
+  height: auto;
+}    
+.shop_page_area {
+  padding-bottom: 90px;
+}    
+.featured_serv_provie ul li {
+  width: 100%;
+}    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+
+}
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) {
+.container {width:300px;}
+.slicknav_menu{
+    display: block;
+}
+.call_us, .week {
+  padding-bottom: 25px;
+}
+.cont_info {
+  width: 240px;
+}
+.week p span, .call_us p span {
+  font-size: 14px;
+}    
+    
+.doctor_img {
+  padding-left: 0;
+}
+.doctor_img > img {
+  margin-bottom: 0;
+}
+.doctor_text {
+  margin-left: 0;
+  padding-top: 20px;
+}
+.doctor_text p {
+  margin-right: 0;
+  margin-top: 20px;
+}
+.welcome_area {
+  padding-bottom: 30px;
+}
+.appskype {
+  height: 250px;
+}
+.boo_apppinment_left {
+  float: none;
+  margin-right: 0;
+  padding-bottom: 55px;
+  padding-top: 50px;
+  width: 100%;
+  text-align: center;
+}
+.booking_form {
+  padding-left: 0;padding-bottom: 45px;
+}
+.fname {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.dtefield {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.message {
+  width: 100%;
+}
+.appblack {
+  height: 100%;
+}
+.sev_tables > ul > li {
+  min-height: 118px;
+  width: 50%;
+}
+.dent_tab_cont p {
+  margin-right: 0;
+}
+.dent_tab_cont ul li {
+  margin-bottom: 12px;
+  margin-right: 0px;
+  width: 100%;
+}
+.dent_tab_cont ul {
+  margin: 20px 0 0;
+}
+.dent_tab_slide > img {
+  width: 100%;
+}
+.latest_news .single_news {
+  margin-bottom: 20px;
+}
+.latest_news .news_txt {
+  width: 100%;
+  padding-bottom: 20px;
+}
+.latest_news_area {
+  padding-bottom: 20px;
+}
+.hospital_room, .doc_award, .pro_doc, .satisfied_patient {
+  margin-bottom: 26px;
+}
+.paddingltnone {
+  padding-left: 15px;
+}
+.your_app_img img {
+  width: 100%;
+}
+.your_app_img {
+  width: 100%;
+}
+.booking_text_bottom h3 {
+  margin: 15px 0 5px;
+}
+.booking_text_bottom {
+  padding-left: 14px;
+}
+.paddingltnone {
+  padding-left: 0;
+  padding-right: 0;
+}
+.faddress {
+  margin-bottom: 20px;
+}
+.faddress h3,.emcall h3,.emailus h3 {
+  margin-bottom: 15px;
+}
+.emcall {
+  margin-bottom: 20px;
+}
+.emailus {
+  margin-bottom: 20px;
+}
+.footer_top {
+  padding-bottom: 30px;
+}
+.newsletter_part {
+  border-bottom: 0;
+  border-top: 0;
+}
+#nwsemail {
+  width: 182px;
+}
+.news_letter {
+  border-right: 0 none;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.medicare {
+  padding-bottom: 2px;
+  padding-top: 36px;
+}
+.footer_menu {
+  padding-bottom: 0;
+}
+.footer_social ul {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+/* gallery */
+.single_img {
+  margin-right: 0;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.gallery_top_part {
+  padding-bottom: 0;
+}
+.first_top3 {
+  overflow: visible;
+}
+.first3bottom {
+  overflow: visible;
+}
+.first3g {
+  overflow: visible;
+}
+.galheilight > .gallery_img img {
+  height: auto;
+  width: 100%;
+}
+.gallery_img img {
+  height: auto;
+  width: 100%;
+}
+.header_top ul li:first-child {
+  margin-right: 90px;
+  margin-bottom: 10px;
+}
+.booking_cart, .nav_search_area{
+  display: none;
+}  
+.single_doc_imgt {
+  margin-left: 0;
+  width: 270px;
+}
+.docimg_top {
+  margin-left: 0;
+}    
+.docimg_rt {
+  width: 100%;
+}    
+.single_doc_imgrt {
+  margin-bottom: 30px;
+}    
+.single_sev_bottom {
+  margin-bottom: 30px;
+}    
+.services2_area .container > div, .services2_bottom_area .container > div {
+  margin-bottom: 30px;
+}    
+.serv_cardiology img, .serv_dental img, .serv_eye img, .serv_neu img {
+  height: auto;
+}     
+.services_details_page {
+  padding-bottom: 50px;
+}    
+.featured_serv_provie ul li {
+  width: 99%;
+}    
+.page_banner {
+  background-position: 65% center;
+}    
+#map_area {
+  min-height: 300px;
+}    
+.single_addres p {
+  width: 180px;
+}    
+.single_addres i {
+  margin-right: 15px;
+}    
+.smk_accordion.acc_with_icon .accordion_in .acc_head, .smk_accordion.acc_with_icon .accordion_in .acc_content {
+  padding-left: 10px;
+  padding-right: 30px;
+}    
+.faq_ctrl div {
+  margin-right: 10px;
+}     
+.app_main_frm {
+  padding: 30px 20px;
+}    
+.afrm_lt {
+  margin-right: 0;
+  width: 100%;
+}    
+.afrm_rt {
+  margin-left: 0;
+  width: 100%;
+}    
+.appointment_area {
+  padding-bottom: 100px;
+  padding-top: 100px;
+}    
+.apo_img {
+  margin-top: 50px;
+}    
+.all_list_element > ul {
+  margin-bottom: 15px;
+}      
+.typo_imgtxt_arch > .col-md-5 > h2.action_box_title, .typo_imgtxt_arch .pupular_post {
+  padding-left: 0;
+}    
+.typo_imgtxt_arch > div{
+    padding-bottom: 30px;
+}    
+.typo_imgtxt_arch h2.action_box_title {
+  margin-bottom: 20px;
+}    
+.action_box_area .row.btn_tag, .action_box_area .row.typo_imgtxt_arch {
+    margin-left: 0;
+    margin-right: 0;
+}    
+.new_content {
+  padding-bottom: 80px;
+}
+.news_side_bar {
+  padding-top: 30px;
+}    
+.detail_heading ul li {
+  width: 100%;
+}    
+.author_img_details {
+  float: none;
+  margin: 0 auto 20px;
+}    
+.author_detail_txt {
+  float: none;
+  width: 100%;
+}    
+.heading_detail h4 {
+  float: left;
+  font-size: 19px;
+}    
+.author_part_detials {
+  padding: 10px;
+}    
+.comm_txt {
+  width: 100%;
+  float: none;
+}    
+.comm_img {
+  margin-right: 15px;
+}    
+.comm_img_rep {
+  margin-right: 10px;
+}    
+.single_comment_reply {
+  padding-left: 28px;
+}    
+.all_products {
+  margin-left: 0;
+}    
+.single_product {
+  margin-left: 0;
+  width: 100%;
+}    
+.single_cart_pro {
+  overflow: scroll;
+  padding-bottom: 20px;
+}    
+.shop_page_area {
+  padding-bottom: 90px;
+}    
+.sincheckbox {
+  margin-right: 0;
+  width: 100%;
+}    
+.fieldlt {
+  margin-bottom: 10px;
+  width: 100%;
+}    
+.fieldrt {
+  width: 100%;
+}    
+.shop_content {
+  padding-bottom: 50px;
+}    
+.pro_img_detail, .pro_text_details {
+  width: 100%;
+}    
+.resp-tab-content {
+  padding: 19px 10px;
+}   
+.rel_product {
+  margin-left: 0;
+}    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+}
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .container {
+        width:450px;
+    }
+.latest_news .style2 .let_news_photo {
+  float: left;
+}
+.booking_buttn_bottom {
+  height: 65px;
+}
+.booking_buttn_bottom a {
+  margin: 0 auto;
+    float: none;
+}    
+.your_app_img {
+  height: 140px;
+}    
+.single_addres p {
+  width: 250px;
+}
+.single_product {
+  padding: 0 50px;
+}    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+}
