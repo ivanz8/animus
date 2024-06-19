@@ -78,17 +78,17 @@
         <p>Already have an account? <a href="login.html">Login</a></p>
     </div>
 
-    <script type="module" src="/firebase/firebase-config.js"></script>
     <script type="module">
         // Import Firebase modules
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
+        import { app } from "/public/firebase/firebase-config.js"; // Adjust the path as needed
 
         // Get the Firebase Auth instance
         const auth = getAuth(app);
 
-        // Function to handle signup form submission
-        const handleSignup = async (e) => {
+        // Signup form submission
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
@@ -97,18 +97,13 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 console.log('Signed up as:', user.email);
-
                 // Redirect after successful signup
                 window.location.href = 'dashboard.html'; // Replace with your dashboard page
             } catch (error) {
                 const errorMessage = error.message;
                 document.getElementById('signupError').textContent = errorMessage;
             }
-        };
-
-        // Signup form submission
-        const signupForm = document.getElementById('signupForm');
-        signupForm.addEventListener('submit', handleSignup);
+        });
     </script>
 </body>
 </html>

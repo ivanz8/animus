@@ -108,10 +108,8 @@
         <p>Don't have an account? <a href="signup.html">Signup</a></p>
         <p><a href="#" id="forgotPassword">Forgot Password?</a></p>
     </div>
-    
 
-
-
+    <script type="module" src="/firebase/firebase-config.js"></script>
     <script type="module">
         // Import Firebase modules
         import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -166,7 +164,5 @@
         const forgotPasswordLink = document.getElementById('forgotPassword');
         forgotPasswordLink.addEventListener('click', handleForgotPassword);
     </script>
-    
-    
 </body>
 </html>
