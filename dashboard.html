@@ -1,145 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animus | Dashboard Page</title>
-    <link rel="stylesheet" href="/styles/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Gallery</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <style>
+    main {
+            padding: 20px;
+        }
+
+        .appointments-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between; /* Adjust as needed */
+        }
+
+        .appointment-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            flex: 0 1 30%; /* Adjust card width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-card h2 {
+            margin-top: 0;
+        }
+
+        .appointment-card p {
+            margin: 5px 0;
+        }
+
+        .edit-btn, .delete-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .edit-btn:hover, .delete-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .modal-content form {
+            display: grid;
+            gap: 10px;
+        }
+
+        .modal-content form label {
+            font-weight: bold;
+        }
+
+        .modal-content form input,
+        .modal-content form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .modal-content form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .modal-content form button:hover {
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+
+        }
+      
+        .schedule-btn {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          background-color: #007bff;
+          border: none;
+          border-radius: 5px;
+          text-align: center;
+          text-decoration: none;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          cursor: pointer;
+        }
+
+        .schedule-btn:hover {
+          background-color: #0056b3;
+          transform: translateY(-2px);
+        }
+
+        .schedule-btn:active {
+          background-color: #004085;
+          transform: translateY(0);
+        }
+        /* CSS for the Doctor List */
+.doctor-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 200px; /* Adjust width as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+}
+
+.card img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin: 0 10px 10px;
+}
+
+.schedule-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.schedule-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.schedule-btn:active {
+  background-color: #004085;
+  transform: translateY(0);
+}
+
+        
+  </style>
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="Home Logo">
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <nav>
+      </li>
+
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="images/doctor6.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="images/doctor1.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="images/doctor2.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../index3.html" class="brand-link">
+      <img src="images/logo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AnimusVet</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" id="userEmail" class="d-block">useremail</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
             
-            <ul>
-                <li><a href="dashboard.html">HOME</a></li>
-                <li><a href="appointment.html">MY APPOINTMENTS</a></li>
-                <li><a href="profile.html">PROFILE</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Available Doctors</h1>
-        <div class="doctor-list">
-            <div class="card">
-                <img src="doctor1.jpg" alt="Doctor 1">
-                <h2>Dr. John Doe</h2>
-                <p>Specialist in Cardiology</p>
-                <button class="schedule-btn" onclick="openModal('Dr. John Doe')">Schedule</button>
-            </div>
-            <div class="card">
-                <img src="doctor2.jpg" alt="Doctor 2">
-                <h2>Dr. Jane Smith</h2>
-                <p>Specialist in Neurology</p>
-                <button class="schedule-btn" onclick="openModal('Dr. Jane Smith')">Schedule</button>
-            </div>
-            <div class="card">
-                <img src="doctor3.jpg" alt="Doctor 3">
-                <h2>Dr. Emily Johnson</h2>
-                <p>Specialist in Pediatrics</p>
-                <button class="schedule-btn" onclick="openModal('Dr. Emily Johnson')">Schedule</button>
-            </div>
-            <!-- Add more doctor cards as needed -->
-        </div>
-    </main>
-
-    <!-- Modal for appointment form -->
-    <div id="appointmentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Schedule an Appointment</h2>
-            <form id="appointmentForm">
-                <label for="doctorName">Doctor Name</label>
-                <input type="text" id="doctorName" name="doctorName" readonly>
-
-                <label for="ownerName">Owner Name</label>
-                <input type="text" id="ownerName" name="ownerName" required>
-
-                <label for="petName">Pet Name</label>
-                <input type="text" id="petName" name="petName" required>
-
-                <label for="appointmentDate">Date</label>
-                <input type="date" id="appointmentDate" name="appointmentDate" required>
-
-                <label for="appointmentTime">Time</label>
-                <input type="time" id="appointmentTime" name="appointmentTime" required>
-
-                <label for="symptoms">Symptoms</label>
-                <textarea id="symptoms" name="symptoms" required></textarea>
-
-                <button type="submit">Submit</button>
-                <p class="error-message" id="appointmentError"></p>
-            </form>
-        </div>
+          </li>
+          <li class="nav-item">
+            <a href="appointment.html" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Appointments
+                <span id="appointmentCount" class="right badge badge-danger">0</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="doctor.html" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Clinics and Doctors
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">3</span>
+              </p>
+            </a>
+            
+      <!-- /.sidebar-menu -->
     </div>
+    <!-- /.sidebar -->
+  </aside>
 
-    <script type="module">
-        // Import Firebase modules
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-        import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Doctors/Clinic</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Doctors/Clinic</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    
+    <!-- Main content -->
+    <main>
+      <div class="doctor-list">
+          <div class="card">
+              <img src="/images/doctor1.png" alt="Doctor 1">
+              <h2>Dr. Maria Dela Cruz</h2>
+              <p>Malaybalay City</p>
+              <button class="schedule-btn" onclick="openModal('Dr. Maria Dela Cruz')">Book</button>
+          </div>
+          <div class="card">
+              <img src="/images/doctor2.png" alt="Doctor 2">
+              <h2>Dr. Ryan Lopez</h2>
+              <p>Pob Valencia City</p>
+              <button class="schedule-btn" onclick="openModal('Dr. Ryan Lopez')">Book</button>
+          </div>
+          <div class="card">
+              <img src="/images/doctor6.png" alt="Doctor 3">
+              <h2>Dr. Emily Cuizon</h2>
+              <p>Pob Quezon Bukidnon</p>
+              <button class="schedule-btn" onclick="openModal('Dr. Emily Cuizon')">Book</button>
+          </div>
+          <!-- Add more doctor cards as needed -->
+      </div>
+  </main>
 
-        // Get the Firebase Auth and Database instances
-        const auth = getAuth(app);
-        const database = getDatabase(app);
+  <!-- Modal for appointment form -->
+  <div id="appointmentModal" class="modal">
+      <div class="modal-content">
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+          <h2>Schedule an Appointment</h2>
+          <form id="appointmentForm">
+              <label for="doctorName">Doctor Name</label>
+              <input type="text" id="doctorName" name="doctorName" readonly>
 
-        // Check if user is authenticated
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                // Redirect to login if not authenticated
-                window.location.href = 'login.html';
-            }
-        });
+              <label for="ownerName">Owner Name</label>
+              <input type="text" id="ownerName" name="ownerName" required>
 
-        // Open modal
-        window.openModal = function(doctorName) {
-            document.getElementById('doctorName').value = doctorName;
-            document.getElementById('appointmentModal').style.display = 'block';
-        };
+              <label for="petName">Pet Name</label>
+              <input type="text" id="petName" name="petName" required>
 
-        // Close modal
-        window.closeModal = function() {
-            document.getElementById('appointmentModal').style.display = 'none';
-        };
+              <label for="appointmentDate">Date</label>
+              <input type="date" id="appointmentDate" name="appointmentDate" required>
 
-        // Handle form submission
-        const appointmentForm = document.getElementById('appointmentForm');
-        appointmentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const doctorName = document.getElementById('doctorName').value;
-            const ownerName = document.getElementById('ownerName').value;
-            const petName = document.getElementById('petName').value;
-            const appointmentDate = document.getElementById('appointmentDate').value;
-            const appointmentTime = document.getElementById('appointmentTime').value;
-            const symptoms = document.getElementById('symptoms').value;
-            
-            try {
-                const user = auth.currentUser;
-                const date = new Date(appointmentDate);
-                const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-                const time = new Date(`1970-01-01T${appointmentTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              <label for="appointmentTime">Time</label>
+              <input type="time" id="appointmentTime" name="appointmentTime" required>
 
-                const appointmentData = {
-                    doctorName,
-                    ownerName,
-                    petName,
-                    date: formattedDate,
-                    time,
-                    symptoms,
-                    userId: user.uid
-                };
-                const userAppointmentsRef = ref(database, 'user_appointments/' + user.uid);
-                const newAppointmentRef = push(userAppointmentsRef);
-                await set(newAppointmentRef, appointmentData);
-                closeModal();
-                alert('Appointment scheduled successfully!');
-            } catch (error) {
-                const errorMessage = error.message;
-                document.getElementById('appointmentError').textContent = errorMessage;
-            }
-        });
-    </script>
+              <label for="symptoms">Symptoms</label>
+              <textarea id="symptoms" name="symptoms" required></textarea>
+
+              <button type="submit">Submit</button>
+              <p class="error-message" id="appointmentError"></p>
+          </form>
+      </div>
+  </div>
+  </div>
+  
+
+
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>Copyright &copy; 2024 <a href="">Animus</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script type="module">
+  // Import Firebase modules
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
+
+  // Get the Firebase Auth and Database instances
+  const auth = getAuth(app);
+  const database = getDatabase(app);
+
+  // Check if user is authenticated
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+          // Fetch and display appointments count.
+          document.getElementById('userEmail').textContent = user.email;
+          document.getElementById('userEmail').href = `mailto:${user.email}`;
+          fetchAppointmentCount(user.uid);
+      } else {
+          // Redirect to login if not authenticated
+          window.location.href = 'login.html';
+      }
+  });
+
+  // Function to fetch and display appointment count
+  function fetchAppointmentCount(userId) {
+      const appointmentsRef = ref(database, 'user_appointments/' + userId);
+      onValue(appointmentsRef, (snapshot) => {
+          const appointments = snapshot.val();
+          const count = appointments ? Object.keys(appointments).length : 0;
+          document.getElementById('appointmentCount').textContent = count;
+      });
+  }
+
+  // Open modal
+  window.openModal = function(doctorName) {
+      document.getElementById('doctorName').value = doctorName;
+      document.getElementById('appointmentModal').style.display = 'block';
+  };
+
+  // Close modal
+  window.closeModal = function() {
+      document.getElementById('appointmentModal').style.display = 'none';
+  };
+
+  // Handle form submission
+  const appointmentForm = document.getElementById('appointmentForm');
+  appointmentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const doctorName = document.getElementById('doctorName').value;
+      const ownerName = document.getElementById('ownerName').value;
+      const petName = document.getElementById('petName').value;
+      const appointmentDate = document.getElementById('appointmentDate').value;
+      const appointmentTime = document.getElementById('appointmentTime').value;
+      const symptoms = document.getElementById('symptoms').value;
+
+      try {
+          const user = auth.currentUser;
+          const date = new Date(appointmentDate);
+          const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+          const time = new Date(`1970-01-01T${appointmentTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          const appointmentData = {
+              doctorName,
+              ownerName,
+              petName,
+              date: formattedDate,
+              time,
+              symptoms,
+              userId: user.uid
+          };
+          const userAppointmentsRef = ref(database, 'user_appointments/' + user.uid);
+          const newAppointmentRef = push(userAppointmentsRef);
+          await set(newAppointmentRef, appointmentData);
+          closeModal();
+          alert('Appointment scheduled successfully!');
+
+          // Update the appointment count
+          fetchAppointmentCount(user.uid);
+      } catch (error) {
+          const errorMessage = error.message;
+          document.getElementById('appointmentError').textContent = errorMessage;
+      }
+  });
+</script>
+
+</script>
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Ekko Lightbox -->
+<script src="../plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- Filterizr-->
+<script src="../plugins/filterizr/jquery.filterizr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
 </body>
 </html>
