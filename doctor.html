@@ -156,6 +156,7 @@
             opacity: 0.8;
 
         }
+      
         .schedule-btn {
           display: inline-block;
           padding: 10px 20px;
@@ -180,6 +181,66 @@
           background-color: #004085;
           transform: translateY(0);
         }
+        /* CSS for the Doctor List */
+.doctor-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 200px; /* Adjust width as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+}
+
+.card img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin: 0 10px 10px;
+}
+
+.schedule-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.schedule-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.schedule-btn:active {
+  background-color: #004085;
+  transform: translateY(0);
+}
+
         
   </style>
 </head>
@@ -234,7 +295,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="images/doctor6.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -250,7 +311,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="images/doctor1.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -266,7 +327,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="images/doctor2.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -397,12 +458,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Appointments</h1>
+            <h1>Doctors/Clinic</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active">Appointments</li>
+              <li class="breadcrumb-item active">Doctors/Clinic</li>
             </ol>
           </div>
         </div>
@@ -411,38 +472,55 @@
     
     <!-- Main content -->
     <main>
-      
-      <div class="appointments-list" id="appointmentsList">
-          <!-- Appointments will be populated here -->
+      <div class="doctor-list">
+          <div class="card">
+              <img src="/images/doctor1.png" alt="Doctor 1">
+              <h2>Dr. Maria Dela Cruz</h2>
+              <p>Malaybalay City</p>
+              <button class="schedule-btn" onclick="openModal('Dr. John Doe')">Schedule</button>
+          </div>
+          <div class="card">
+              <img src="/images/doctor2.png" alt="Doctor 2">
+              <h2>Dr. Ryan Lopez</h2>
+              <p>Pob Valencia City</p>
+              <button class="schedule-btn" onclick="openModal('Dr. Jane Smith')">Schedule</button>
+          </div>
+          <div class="card">
+              <img src="/images/doctor6.png" alt="Doctor 3">
+              <h2>Dr. Emily Cuizon</h2>
+              <p>Pob Quezon Bukidnon</p>
+              <button class="schedule-btn" onclick="openModal('Dr. Emily Johnson')">Schedule</button>
+          </div>
+          <!-- Add more doctor cards as needed -->
       </div>
-    </main>
-    <div id="editAppointmentModal" class="modal">
+  </main>
+
+  <!-- Modal for appointment form -->
+  <div id="appointmentModal" class="modal">
       <div class="modal-content">
-          <span class="close-btn" onclick="closeEditModal()">&times;</span>
-          <h2>Edit Appointment</h2>
-          <form id="editAppointmentForm">
-              <input type="hidden" id="editAppointmentId" name="appointmentId">
-  
-              <label for="editDoctorName">Doctor Name</label>
-              <input type="text" id="editDoctorName" name="doctorName" readonly>
-  
-              <label for="editOwnerName">Owner Name</label>
-              <input type="text" id="editOwnerName" name="ownerName" required>
-  
-              <label for="editPetName">Pet Name</label>
-              <input type="text" id="editPetName" name="petName" required>
-  
-              <label for="editAppointmentDate">Date</label>
-              <input type="date" id="editAppointmentDate" name="appointmentDate" required>
-  
-              <label for="editAppointmentTime">Time</label>
-              <input type="time" id="editAppointmentTime" name="appointmentTime" required>
-  
-              <label for="editSymptoms">Symptoms</label>
-              <textarea id="editSymptoms" name="symptoms" required></textarea>
-  
-              <button type="submit">Save Changes</button>
-              <p class="error-message" id="editAppointmentError"></p>
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+          <h2>Schedule an Appointment</h2>
+          <form id="appointmentForm">
+              <label for="doctorName">Doctor Name</label>
+              <input type="text" id="doctorName" name="doctorName" readonly>
+
+              <label for="ownerName">Owner Name</label>
+              <input type="text" id="ownerName" name="ownerName" required>
+
+              <label for="petName">Pet Name</label>
+              <input type="text" id="petName" name="petName" required>
+
+              <label for="appointmentDate">Date</label>
+              <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+              <label for="appointmentTime">Time</label>
+              <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+              <label for="symptoms">Symptoms</label>
+              <textarea id="symptoms" name="symptoms" required></textarea>
+
+              <button type="submit">Submit</button>
+              <p class="error-message" id="appointmentError"></p>
           </form>
       </div>
   </div>
@@ -468,8 +546,8 @@
 <!-- ./wrapper -->
 <script type="module">
   // Import Firebase modules
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
   import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
 
   // Get the Firebase Auth and Database instances
@@ -479,106 +557,47 @@
   // Check if user is authenticated
   onAuthStateChanged(auth, (user) => {
       if (user) {
+          // Fetch and display appointments count.
           document.getElementById('userEmail').textContent = user.email;
           document.getElementById('userEmail').href = `mailto:${user.email}`;
-          // Fetch and display appointments
-          fetchAppointments(user.uid);
-
-          // Update profile card with user information
-          updateProfileCard(user);
+          fetchAppointmentCount(user.uid);
       } else {
           // Redirect to login if not authenticated
           window.location.href = 'login.html';
       }
   });
 
-  // Function to fetch and display appointments
-  function fetchAppointments(userId) {
+  // Function to fetch and display appointment count
+  function fetchAppointmentCount(userId) {
       const appointmentsRef = ref(database, 'user_appointments/' + userId);
       onValue(appointmentsRef, (snapshot) => {
-          const appointmentsList = document.getElementById('appointmentsList');
-          const appointmentCountBadge = document.getElementById('appointmentCount');
-          appointmentsList.innerHTML = ''; // Clear the list
           const appointments = snapshot.val();
-          let count = 0;
-          if (appointments) {
-              count = Object.keys(appointments).length;
-              for (const appointmentId in appointments) {
-                  const appointment = appointments[appointmentId];
-                  const appointmentElement = document.createElement('div');
-                  appointmentElement.classList.add('appointment-card');
-
-                  appointmentElement.innerHTML = `
-                      <h2>${appointment.doctorName}</h2>
-                      <p><strong>Owner Name:</strong> ${appointment.ownerName}</p>
-                      <p><strong>Pet Name:</strong> ${appointment.petName}</p>
-                      <p><strong>Date:</strong> ${appointment.date}</p>
-                      <p><strong>Time:</strong> ${appointment.time}</p>
-                      <p><strong>Symptoms:</strong> ${appointment.symptoms}</p>
-                      <button class="edit-btn" onclick="openEditModal('${appointmentId}', '${appointment.doctorName}', '${appointment.ownerName}', '${appointment.petName}', '${appointment.date}', '${appointment.time}', '${appointment.symptoms}')">Edit</button>
-                      <button class="delete-btn" onclick="deleteAppointment('${appointmentId}')">Delete</button>
-                  `;
-                  appointmentsList.appendChild(appointmentElement);
-              }
-          } else {
-              appointmentsList.innerHTML = '<p>No appointments found.</p>';
-          }
-          appointmentCountBadge.textContent = count; // Update the badge with the number of appointments
+          const count = appointments ? Object.keys(appointments).length : 0;
+          document.getElementById('appointmentCount').textContent = count;
       });
   }
 
-  // Function to update profile card with user information
-  function updateProfileCard(user) {
-      const profileCard = document.getElementById('profileCard');
-      const profileImg = profileCard.querySelector('.profile-img img');
-      // Placeholder for profile image, update src attribute with actual image URL
-      profileImg.src = 'profile-placeholder.png'; // Replace with actual profile image URL
-
-      const profileDetails = profileCard.querySelector('.profile-info');
-      profileDetails.innerHTML = `
-          <p><strong>User Name:</strong> ${user.displayName || 'Unknown'}</p>
-          <p><strong>Email:</strong> ${user.email}</p>
-      `;
-  }
-
-  // Function to logout user
-  window.logout = function() {
-      signOut(auth).then(() => {
-          // Redirect to login page after logout
-          window.location.href = 'login.html';
-      }).catch((error) => {
-          console.error('Logout error:', error);
-      });
+  // Open modal
+  window.openModal = function(doctorName) {
+      document.getElementById('doctorName').value = doctorName;
+      document.getElementById('appointmentModal').style.display = 'block';
   };
 
-  // Open modal for editing
-  window.openEditModal = function(id, doctorName, ownerName, petName, date, time, symptoms) {
-      document.getElementById('editAppointmentId').value = id;
-      document.getElementById('editDoctorName').value = doctorName;
-      document.getElementById('editOwnerName').value = ownerName;
-      document.getElementById('editPetName').value = petName;
-      document.getElementById('editAppointmentDate').value = date.split('/').reverse().join('-'); // Convert MM/DD/YYYY to YYYY-MM-DD
-      document.getElementById('editAppointmentTime').value = time;
-      document.getElementById('editSymptoms').value = symptoms;
-      document.getElementById('editAppointmentModal').style.display = 'block';
+  // Close modal
+  window.closeModal = function() {
+      document.getElementById('appointmentModal').style.display = 'none';
   };
 
-  // Close modal for editing
-  window.closeEditModal = function() {
-      document.getElementById('editAppointmentModal').style.display = 'none';
-  };
-
-  // Handle edit form submission
-  const editAppointmentForm = document.getElementById('editAppointmentForm');
-  editAppointmentForm.addEventListener('submit', async (e) => {
+  // Handle form submission
+  const appointmentForm = document.getElementById('appointmentForm');
+  appointmentForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const appointmentId = document.getElementById('editAppointmentId').value;
-      const doctorName = document.getElementById('editDoctorName').value;
-      const ownerName = document.getElementById('editOwnerName').value;
-      const petName = document.getElementById('editPetName').value;
-      const appointmentDate = document.getElementById('editAppointmentDate').value;
-      const appointmentTime = document.getElementById('editAppointmentTime').value;
-      const symptoms = document.getElementById('editSymptoms').value;
+      const doctorName = document.getElementById('doctorName').value;
+      const ownerName = document.getElementById('ownerName').value;
+      const petName = document.getElementById('petName').value;
+      const appointmentDate = document.getElementById('appointmentDate').value;
+      const appointmentTime = document.getElementById('appointmentTime').value;
+      const symptoms = document.getElementById('symptoms').value;
 
       try {
           const user = auth.currentUser;
@@ -586,7 +605,7 @@
           const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
           const time = new Date(`1970-01-01T${appointmentTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-          const updatedAppointmentData = {
+          const appointmentData = {
               doctorName,
               ownerName,
               petName,
@@ -595,27 +614,21 @@
               symptoms,
               userId: user.uid
           };
-          const appointmentRef = ref(database, 'user_appointments/' + user.uid + '/' + appointmentId);
-          await update(appointmentRef, updatedAppointmentData);
-          closeEditModal();
-          alert('Appointment updated successfully!');
+          const userAppointmentsRef = ref(database, 'user_appointments/' + user.uid);
+          const newAppointmentRef = push(userAppointmentsRef);
+          await set(newAppointmentRef, appointmentData);
+          closeModal();
+          alert('Appointment scheduled successfully!');
+
+          // Update the appointment count
+          fetchAppointmentCount(user.uid);
       } catch (error) {
           const errorMessage = error.message;
-          document.getElementById('editAppointmentError').textContent = errorMessage;
+          document.getElementById('appointmentError').textContent = errorMessage;
       }
   });
+</script>
 
-  // Handle delete appointment
-  window.deleteAppointment = async function(appointmentId) {
-      try {
-          const user = auth.currentUser;
-          const appointmentRef = ref(database, 'user_appointments/' + user.uid + '/' + appointmentId);
-          await remove(appointmentRef);
-          alert('Appointment deleted successfully!');
-      } catch (error) {
-          alert('Failed to delete appointment: ' + error.message);
-      }
-  };
 </script>
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>

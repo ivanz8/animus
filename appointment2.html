@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animus | Appointment Page</title>
+   
+    <style>
+        /* Reset and base styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        .appointments-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between; /* Adjust as needed */
+        }
+
+        .appointment-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            flex: 0 1 30%; /* Adjust card width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-card h2 {
+            margin-top: 0;
+        }
+
+        .appointment-card p {
+            margin: 5px 0;
+        }
+
+        .edit-btn, .delete-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .edit-btn:hover, .delete-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .modal-content form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .modal-content form label {
+            font-weight: bold;
+        }
+
+        .modal-content form input,
+        .modal-content form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .modal-content form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .modal-content form button:hover {
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Home Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">HOME</a></li>
+                <li><a href="appointment.html">MY APPOINTMENTS</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+                <li><button class="logout-btn" onclick="logout()">LOGOUT</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>My Appointments</h1>
+        <div class="appointments-list" id="appointmentsList">
+            <!-- Appointments will be populated here -->
+        </div>
+    </main>
+
+    <!-- Modal for editing appointment -->
+    <div id="editAppointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Appointment</h2>
+            <form id="editAppointmentForm">
+                <input type="hidden" id="editAppointmentId" name="appointmentId">
+
+                <label for="editDoctorName">Doctor Name</label>
+                <input type="text" id="editDoctorName" name="doctorName" readonly>
+
+                <label for="editOwnerName">Owner Name</label>
+                <input type="text" id="editOwnerName" name="ownerName" required>
+
+                <label for="editPetName">Pet Name</label>
+                <input type="text" id="editPetName" name="petName" required>
+
+                <label for="editAppointmentDate">Date</label>
+                <input type="date" id="editAppointmentDate" name="appointmentDate" required>
+
+                <label for="editAppointmentTime">Time</label>
+                <input type="time" id="editAppointmentTime" name="appointmentTime" required>
+
+                <label for="editSymptoms">Symptoms</label>
+                <textarea id="editSymptoms" name="symptoms" required></textarea>
+
+                <button type="submit">Save Changes</button>
+                <p class="error-message" id="editAppointmentError"></p>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { app } from "/firebase/firebase-config.js"; // Adjust the path as needed
+
+        // Get the Firebase Auth and Database instances
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Check if user is authenticated
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Fetch and display appointments
+                fetchAppointments(user.uid);
+
+                // Update profile card with user information
+                updateProfileCard(user);
+            } else {
+                // Redirect to login if not authenticated
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Function to fetch and display appointments
+        function fetchAppointments(userId) {
+            const appointmentsRef = ref(database, 'user_appointments/' + userId);
+            onValue(appointmentsRef, (snapshot) => {
+                const appointmentsList = document.getElementById('appointmentsList');
+                appointmentsList.innerHTML = ''; // Clear the list
+                const appointments = snapshot.val();
+                if (appointments) {
+                    for (const appointmentId in appointments) {
+                        const appointment = appointments[appointmentId];
+                        const appointmentElement = document.createElement('div');
+                        appointmentElement.classList.add('appointment-card');
+
+                        appointmentElement.innerHTML = `
+                            <h2>${appointment.doctorName}</h2>
+                            <p><strong>Owner Name:</strong> ${appointment.ownerName}</p>
+                            <p><strong>Pet Name:</strong> ${appointment.petName}</p>
+                            <p><strong>Date:</strong> ${appointment.date}</p>
+                            <p><strong>Time:</strong> ${appointment.time}</p>
+                            <p><strong>Symptoms:</strong> ${appointment.symptoms}</p>
+                            <button class="edit-btn" onclick="openEditModal('${appointmentId}', '${appointment.doctorName}', '${appointment.ownerName}', '${appointment.petName}', '${appointment.date}', '${appointment.time}', '${appointment.symptoms}')">Edit</button>
+                            <button class="delete-btn" onclick="deleteAppointment('${appointmentId}')">Delete</button>
+                        `;
+                        appointmentsList.appendChild(appointmentElement);
+                    }
+                } else {
+                    appointmentsList.innerHTML = '<p>No appointments found.</p>';
+                }
+            });
+        }
+
+        // Function to update profile card with user information
+        function updateProfileCard(user) {
+            const profileCard = document.getElementById('profileCard');
+            const profileImg = profileCard.querySelector('.profile-img img');
+            // Placeholder for profile image, update src attribute with actual image URL
+            profileImg.src = 'profile-placeholder.png'; // Replace with actual profile image URL
+
+            const profileDetails = profileCard.querySelector('.profile-info');
+            profileDetails.innerHTML = `
+                <p><strong>User Name:</strong> ${user.displayName || 'Unknown'}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+            `;
+        }
+
+        // Function to logout user
+        window.logout = function() {
+            signOut(auth).then(() => {
+                // Redirect to login page after logout
+                window.location.href = 'login.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+            });
+        };
+
+        // Open modal for editing
+        window.openEditModal = function(id, doctorName, ownerName, petName, date, time, symptoms) {
+            document.getElementById('editAppointmentId').value = id;
+            document.getElementById('editDoctorName').value = doctorName;
+            document.getElementById('editOwnerName').value = ownerName;
+            document.getElementById('editPetName').value = petName;
+            document.getElementById('editAppointmentDate').value = date.split('/').reverse().join('-'); // Convert MM/DD/YYYY to YYYY-MM-DD
+            document.getElementById('editAppointmentTime').value = time;
+            document.getElementById('editSymptoms').value = symptoms;
+            document.getElementById('editAppointmentModal').style.display = 'block';
+        };
+
+        // Close modal for editing
+        window.closeEditModal = function() {
+            document.getElementById('editAppointmentModal').style.display = 'none';
+        };
+
+        // Handle edit form submission
+        const editAppointmentForm = document.getElementById('editAppointmentForm');
+        editAppointmentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const appointmentId = document.getElementById('editAppointmentId').value;
+            const doctorName = document.getElementById('editDoctorName').value;
+            const ownerName = document.getElementById('editOwnerName').value;
+            const petName = document.getElementById('editPetName').value;
+            const appointmentDate = document.getElementById('editAppointmentDate').value;
+            const appointmentTime = document.getElementById('editAppointmentTime').value;
+            const symptoms = document.getElementById('editSymptoms').value;
+
+            try {
+                const user = auth.currentUser;
+                const date = new Date(appointmentDate);
+                const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+                const time = new Date(`1970-01-01T${appointmentTime}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const updatedAppointmentData = {
+                    doctorName,
+                    ownerName,
+                    petName,
+                    date: formattedDate,
+                    time,
+                    symptoms,
+                    userId: user.uid
+                };
+                const appointmentRef = ref(database, 'user_appointments/' + user.uid + '/' + appointmentId);
+                await update(appointmentRef, updatedAppointmentData);
+                closeEditModal();
+                alert('Appointment updated successfully!');
+            } catch (error) {
+                const errorMessage = error.message;
+                document.getElementById('editAppointmentError').textContent = errorMessage;
+            }
+        });
+
+        // Handle delete appointment
+        window.deleteAppointment = async function(appointmentId) {
+            try {
+                const user = auth.currentUser;
+                const appointmentRef = ref(database, 'user_appointments/' + user.uid + '/' + appointmentId);
+                await remove(appointmentRef);
+                alert('Appointment deleted successfully!');
+            } catch (error) {
+                alert('Failed to delete appointment: ' + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
